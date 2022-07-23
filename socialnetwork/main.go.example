@@ -1,0 +1,26 @@
+//GOOS=linux GOARCH=amd64 CGO_ENABLED=0 GO111MODULE=auto go build
+package main
+
+import (
+	"github.com/go-rest-framework/core"
+	"github.com/go-rest-framework/users"
+)
+
+func main() {
+	a := core.App{}
+
+	a.Config = core.Config{
+		Dbtype:          "postgres",
+		Dbhost:          "postgresdb",
+		Dbname:          "postgres",
+		Dbuser:          "postgres",
+		Dbpass:          "rootpass",
+		TokenSigningKey: "verysecretkey",
+		MailLogin:       "mailsender@gmail.com",
+		MailPassword:    "secretmailpass",
+	}
+
+	a.Init()
+	users.Configure(a)
+	a.Run(":1888")
+}

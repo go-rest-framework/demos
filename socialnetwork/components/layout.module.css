@@ -1,0 +1,12 @@
+.backToHome {
+  margin: 3rem 0 0;
+}
+
+.list {
+    padding-left: 1em;
+    color: red;
+}
+
+.list a {
+    text-decoration: none;
+}

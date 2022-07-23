@@ -1,0 +1,74 @@
+# Последняя версия docker-compose
+version: '3'
+
+# Создаем общую сеть deafult для всех контейнеров
+networks:
+  wonet:
+    driver: bridge
+
+# Создаем отдельные контейнеры
+services:
+  web:
+    image: nginx
+    volumes:
+      #- ../dist/:/usr/share/nginx/html
+      - ./conf/nginx/site.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - wonet
+    ports:
+      - "80:80"
+    command: [nginx, '-g', 'daemon off;']
+    depends_on:
+      - nodejs1
+      - golang
+  # Контейнер с веб-приложением
+  #woapp:
+  nodejs1:
+    restart: always
+    ports:
+      - "3000:3000"
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    networks:
+      - wonet
+    # Запускаем только после db
+    depends_on:
+      - golang
+    #  - db
+    volumes:
+      - "../:/usr/src/app"
+      - "/usr/src/app/node_modules"
+      - "/usr/src/app/.next"
+  golang:
+    restart: always
+    image: golang:1.13
+    ports:
+        - "1888:1888"
+          # Подключаем к общей сети с другими контейнерами
+    networks:
+      - wonet
+          # Запускаем только после db
+    depends_on:
+      - postgresdb
+      #- mysqldb
+      #- db
+      #- mongodb
+      #- mirror
+      #- redis
+      # Линкуем внешнюю папку с исходниками внутрь
+    volumes:
+        - "../:/go/src/app"
+    command: "./src/app/app test"
+    environment:
+      #API_URL: https://procedure-sandbox.prozorro.sale
+  postgresdb:
+    image: postgres
+    restart: always
+    networks:
+      - wonet
+    # Показываем наружу порт
+    environment:
+        POSTGRES_PASSWORD: rootpass
+    volumes:
+        - ./postgres-volume-sandbox:/var/lib/postgresql/data
