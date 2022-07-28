@@ -24,6 +24,7 @@ import Stack from "@mui/material/Stack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import Datalist from "./datalist";
+import AppBar from "./appbar";
 
 declare module "@mui/material/styles" {
     interface Theme {
@@ -50,8 +51,6 @@ const theme = createTheme({
         //},
     },
 });
-
-const name = "WorkOverlord";
 
 const footers = [
     {
@@ -131,36 +130,36 @@ export const AppName = "Demogram";
 export default function Layout({ children, home }: { children: React.ReactNode; home?: boolean }) {
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xl">
-                <CssBaseline />
-                <Head>
-                    <link rel="icon" href="/images/logo.svg" />
-                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-                    <meta name="description" content="Learn how to build a personal website using Next.js" />
-                    <meta
-                        property="og:image"
-                        content={`https://og-image.vercel.app/${encodeURI(
-                            siteTitle
-                        )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-                    />
-                    <meta name="og:title" content={siteTitle} />
-                    <meta name="twitter:card" content="summary_large_image" />
-                </Head>
-                <header>
-                    {home ? (
-                        ""
-                    ) : (
-                        <>
-                            <Link href="/">
+            <CssBaseline />
+            <Head>
+                <link rel="icon" href="/images/logo.svg" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+                <meta name="description" content="Learn how to build a personal website using Next.js" />
+                <meta
+                    property="og:image"
+                    content={`https://og-image.vercel.app/${encodeURI(
+                        siteTitle
+                    )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
+                />
+                <meta name="og:title" content={siteTitle} />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Head>
+            <header>
+                {home ? (
+                    ""
+                ) : (
+                    <>
+                        <AppBar />
+                        {/*<Link href="/">
                                 <a>← Back to home</a>
-                            </Link>
-                            {/*<Link href="/user/reg">
+                            </Link>*/}
+                        {/*<Link href="/user/reg">
                                 <a>Registration</a>
                             </Link>
                             <Link href="/user/login">
                                 <a>Login</a>
                             </Link>*/}
-                            {/*<Link href="/">
+                        {/*<Link href="/">
                             <a>
                                 <Image
                                     priority
@@ -180,9 +179,10 @@ export default function Layout({ children, home }: { children: React.ReactNode; 
                                 <a className={utilStyles.colorInherit}>{name}</a>
                             </Link>
                         </h2>*/}
-                        </>
-                    )}
-                </header>
+                    </>
+                )}
+            </header>
+            <Container component="main" maxWidth="xl">
                 <main>{children}</main>
                 <footer>
                     <Container

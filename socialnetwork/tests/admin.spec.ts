@@ -1,33 +1,25 @@
 /*
 user scenario
-    user 1
+    TODO separate spec to small specialized specs
+    admin 1
         go to main page
         see name
         see page name
         see login form
         fill form
-        see login errors
-        click Sign Up btn
-        fill wrong data
-        see errors
-        fill form with correct data
-        see success msg
-        see candidat page
-        see email approve request
-        do email approve with special endpoint for test user
-        see user page
-            see 0 elements in main container
-            see msg btn and counter
-            see user menu bnt
-            see add element btn
-            see search field
-        click add element bnt
-    user 2
-        go to main page
-        see name
-        see page name
-        see login with google btn
-        click login with google btn
+        see admin dashboard page
+        see user diagram
+        see elements diagram
+        see views diagram
+        see activity diagram
+        click menu btn
+        see users list menu item
+        click user list menu item
+        see users list
+        click user
+        see user info
+        block users
+        delete all users
 
 */
 

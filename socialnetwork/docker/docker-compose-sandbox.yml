@@ -60,7 +60,7 @@ services:
     volumes:
         - "../:/go/src/app"
     command: "./src/app/app test"
-    environment:
+    #environment:
       #API_URL: https://procedure-sandbox.prozorro.sale
   postgresdb:
     image: postgres
